@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Marquee</title>
+<script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="play" @click="funPlay">
+    <input type="button" value="pause" @click="funPause">
+    <h4>{{msg}}</h4>  
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg:"<@<@@<@@@<@@@@<@@@@@#####~~~~~~~",
+        timer: null,
+      },
+      methods: {
+        funPlay(){
+          // this if function is to ensure no more than one timer is turned on.  
+          if(this.timer==null)
+          {this.timer=setInterval(()=>{
+            this.msg=this.msg.substring(1)+this.msg.substring(0,1);
+          },400);}    
+        },
+        funPause(){
+          clearInterval(this.timer);
+          this.timer=null;
+          }, 
+      },
+    });
+  </script>
+</body>
+</html>
